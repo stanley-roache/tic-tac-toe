@@ -3,9 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "ramda": "^0.25.0",
+    "ramda-adjunct": "^2.10.0",
     "react": "^16.5.0",
     "react-dom": "^16.5.0",
-    "react-scripts": "1.1.5"
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-scripts": "1.1.5",
+    "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.5",
+    "redux-observable": "^1.0.0",
+    "rxjs": "^6.3.2",
+    "rxjs-compat": "^6.3.2",
+    "styled-components": "^3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -24,8 +34,15 @@
     }
   },
   "devDependencies": {
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
+    "enzyme-to-json": "^3.3.4",
     "husky": "^0.14.3",
+    "jest-enzyme": "^6.0.4",
+    "jest-styled-components": "^6.2.0",
     "lint-staged": "^7.2.2",
-    "prettier-standard": "^8.0.1"
+    "prettier-standard": "^8.0.1",
+    "react-test-renderer": "^16.5.0",
+    "redux-mock-store": "^1.5.3"
   }
 }
