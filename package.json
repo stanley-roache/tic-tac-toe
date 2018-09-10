@@ -41,6 +41,7 @@
       "src/**/*.{js,jsx}",
       "!src/utilities/index.js",
       "!src/state/index.js",
+      "!src/containers/index.js",
       "!<rootDir>/node_modules/"
     ],
     "snapshotSerializers": [

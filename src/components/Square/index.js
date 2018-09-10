@@ -19,8 +19,10 @@ const StyledSquare = styled.div`
 StyledSquare.displayName = 'StyledSquare'
 
 export default function Square ({ handleClick, index, player }) {
-  return (
-    <StyledSquare index={index} player={player} onClick={handleClick}>
+  return isUndefined(player) ? (
+    <StyledSquare index={index} onClick={handleClick} />
+  ) : (
+    <StyledSquare index={index} player={player}>
       {player}
     </StyledSquare>
   )
