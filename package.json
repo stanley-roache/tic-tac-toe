@@ -33,6 +33,18 @@
       ]
     }
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "!src/registerServiceWorker.js",
+      "!src/index.js",
+      "!src/components/index.js",
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "devDependencies": {
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
