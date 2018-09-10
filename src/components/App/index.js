@@ -19,19 +19,15 @@ export default function App () {
   return (
     <StyledApp>
       <Board>
-        <div>
-          <div>
-            <Square index={0} player='x' />
-            <Square index={1} player='o' />
-            <Square index={2} player='x' />
-            <Square index={3} player='o' />
-            <Square index={4} player='x' />
-            <Square index={5} player='o' />
-            <Square index={6} player='x' />
-            <Square index={7} player='o' />
-            <Square index={8} player='x' />
-          </div>
-        </div>
+        <Square index={0} player='x' />
+        <Square index={1} player='o' />
+        <Square index={2} player='x' />
+        <Square index={3} player='o' />
+        <Square index={4} player='x' />
+        <Square index={5} player='o' />
+        <Square index={6} player='x' />
+        <Square index={7} player='o' />
+        <Square index={8} player='x' />
       </Board>
     </StyledApp>
   )
