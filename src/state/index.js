@@ -1,4 +1,4 @@
-import { SQUARE_CLICKED } from './constants'
+import { GAME_OVER, SQUARE_CLICKED } from './constants'
 import { squareClicked } from './actions'
 import { initialState, rootReducer } from './reducers'
 import { getMoves } from './selectors'
@@ -6,9 +6,10 @@ import configureStore from './store'
 
 export {
   configureStore,
+  GAME_OVER,
   getMoves,
   initialState,
   rootReducer,
-  squareClicked,
-  SQUARE_CLICKED
+  SQUARE_CLICKED,
+  squareClicked
 }
