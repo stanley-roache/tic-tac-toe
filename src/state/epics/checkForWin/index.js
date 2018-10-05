@@ -1,5 +1,7 @@
 import { Observable } from 'rxjs'
-import { filter, map } from 'rxjs/operators'
+import { withLatestFrom, map } from 'rxjs/operators'
+
+import { ofType } from 'redux-observable'
 
 import { head, length, union } from 'ramda'
 import { isNonEmptyArray } from 'ramda-adjunct'
@@ -15,9 +17,10 @@ import { getBoard, getWins } from '../../../utilities'
 
 export default function checkForWinEpic (action$, state$) {
   return action$.pipe(
-    filter(action => action.type === SQUARE_CLICKED),
-    map(() => {
-      const moves = getMoves(state$.value)
+    ofType(SQUARE_CLICKED),
+    withLatestFrom(state$),
+    map(([, state]) => {
+      const moves = getMoves(state)
       const plays = length(moves)
 
       if (plays < 5) return nullAction()
@@ -38,6 +41,6 @@ export default function checkForWinEpic (action$, state$) {
 
       return nullAction()
     }),
-    filter(action => action.type === GAME_OVER)
+    ofType(GAME_OVER)
   )
 }
