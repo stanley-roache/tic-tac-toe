@@ -7,11 +7,15 @@ import { rootReducer as reducer } from '..'
 import { checkForWinEpic } from '../epics'
 
 const epicMiddleware = createEpicMiddleware()
-const baseMiddleware = applyMiddleware(epicMiddleware)
-const middleware = composeWithDevTools(baseMiddleware)
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+// const baseMiddleware = applyMiddleware(epicMiddleware)
+// const middleware = composeWithDevTools(baseMiddleware)
 
 export default function configureStore () {
-  const store = createStore(reducer, middleware)
+  const store = createStore(
+    reducer,
+    composeWithDevTools(applyMiddleware(epicMiddleware))
+  )
 
   epicMiddleware.run(checkForWinEpic)
 

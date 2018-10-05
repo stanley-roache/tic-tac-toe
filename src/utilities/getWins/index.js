@@ -1,7 +1,6 @@
-// src/utilities/getWins/index.js
 import { filter } from 'ramda'
 
-const patterns = [
+const winPatterns = [
   [0, 1, 2],
   [3, 4, 5],
   [6, 7, 8],
@@ -19,5 +18,5 @@ export default function getWins (board) {
     return (
       Boolean(board[s1]) && board[s1] === board[s2] && board[s2] === board[s3]
     )
-  }, patterns)
+  }, winPatterns)
 }
