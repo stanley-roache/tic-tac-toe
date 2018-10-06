@@ -1,4 +1,4 @@
-import { withLatestFrom, map } from 'rxjs/operators'
+import { filter, map, withLatestFrom } from 'rxjs/operators'
 
 import { ofType } from 'redux-observable'
 
@@ -18,12 +18,13 @@ export default function checkForWinEpic (action$, state$) {
   return action$.pipe(
     ofType(SQUARE_CLICKED),
     withLatestFrom(state$),
-    map(([, state]) => {
-      const moves = getMoves(state)
-      const plays = length(moves)
-
-      if (plays < 5) return nullAction()
-
+    map(([, state]) => getMoves(state)),
+    map(moves => ({
+      moves,
+      plays: length(moves)
+    })),
+    filter(({ plays }) => plays >= 5),
+    map(({ moves, plays }) => {
       const board = getBoard(moves)
       const wins = getWins(board)
 
