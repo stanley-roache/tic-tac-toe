@@ -1,17 +1,11 @@
-import { filter, map, withLatestFrom } from 'rxjs/operators'
-
+import { map, mergeMap, withLatestFrom } from 'rxjs/operators'
+import { of } from 'rxjs'
 import { ofType } from 'redux-observable'
 
 import { head, length, union } from 'ramda'
 import { isNonEmptyArray } from 'ramda-adjunct'
 
-import {
-  getMoves,
-  gameOver,
-  nullAction,
-  SQUARE_CLICKED,
-  GAME_OVER
-} from '../..'
+import { getMoves, gameOver, SQUARE_CLICKED } from '../..'
 import { getBoard, getWins } from '../../../utilities'
 
 export default function checkForWinEpic (action$, state$) {
@@ -19,12 +13,13 @@ export default function checkForWinEpic (action$, state$) {
     ofType(SQUARE_CLICKED),
     withLatestFrom(state$),
     map(([, state]) => getMoves(state)),
-    map(moves => ({
-      moves,
-      plays: length(moves)
-    })),
-    filter(({ plays }) => plays >= 5),
-    map(({ moves, plays }) => {
+    mergeMap(moves => {
+      const plays = length(moves)
+
+      if (plays < 5) {
+        return of()
+      }
+
       const board = getBoard(moves)
       const wins = getWins(board)
 
@@ -32,15 +27,14 @@ export default function checkForWinEpic (action$, state$) {
         const squares = length(wins) < 2 ? head(wins) : union(...wins)
         const player = board[head(squares)]
 
-        return gameOver(squares, player)
+        return of(gameOver(squares, player))
       }
 
       if (plays > 8) {
-        return gameOver([])
+        return of(gameOver([]))
       }
 
-      return nullAction()
-    }),
-    ofType(GAME_OVER)
+      return of()
+    })
   )
 }
