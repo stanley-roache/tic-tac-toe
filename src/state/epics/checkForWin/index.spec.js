@@ -60,9 +60,11 @@ jest.mock('../../../utilities', () => ({
 describe('epics', function () {
   describe('checkForWin', function () {
     it(`checks for and responds to wins correctly`, function () {
-      const epicMiddleware = createEpicMiddleware(checkForWinEpic)
+      const epicMiddleware = createEpicMiddleware()
       const store = configureMockStore([epicMiddleware])({})
       const action = squareClicked()
+
+      epicMiddleware.run(checkForWinEpic)
 
       store.dispatch(action)
       store.dispatch(action)
@@ -89,8 +91,6 @@ describe('epics', function () {
         action,
         gameOver()
       ])
-
-      epicMiddleware.replaceEpic(checkForWinEpic)
     })
   })
 })
